@@ -1,0 +1,15 @@
+ul {
+    border:3px solid black;
+    width:340px;
+    list-style-type: none;
+    align-items: center;
+    padding:0;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 3px;
+}
+li {
+    padding-top: 10px;
+    height:50px;
+    border-bottom:2px solid black;
+}

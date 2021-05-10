@@ -1,0 +1,9 @@
+<a *ngFor="let hero of monsters">
+{{hero.name}}
+</a>
+<br>
+<ul class="monsters">
+    <li *ngFor="let monster of monsters">
+        <span class="badge"><img src="../../icons/{{monster.type}}.svg"></span> {{monster.name}}<br><img src="../../icons/attack.svg"> {{monster.attack}}attack <img src="./icons/armor.svg">{{monster.armor}}armor
+    </li>
+</ul>
