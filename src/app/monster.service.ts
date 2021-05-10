@@ -18,31 +18,30 @@ export class MonsterService {
   constructor(
     private http: HttpClient) { }
 
-  /** GET heroes from the server */
   getMonsters(): Observable<Monster[]> {
     return this.http.get<Monster[]>(this.monsterUrl)
       .pipe(
-        catchError(this.handleError<Monster[]>('getHeroes', []))
+        catchError(this.handleError<Monster[]>('getMonsters', []))
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
-  getHeroNo404<Data>(id: number): Observable<Monster> {
+
+  getMonsterNo404<Data>(id: number): Observable<Monster> {
     const url = `${this.monsterUrl}/?id=${id}`;
     return this.http.get<Monster[]>(url)
       .pipe(
-        map(heroes => heroes[0]), // returns a {0|1} element array
+        map(monsters => monsters[0]),
         tap(h => {
           const outcome = h ? `fetched` : `did not find`;
         }),
-        catchError(this.handleError<Monster>(`getHero id=${id}`))
+        catchError(this.handleError<Monster>(`getMonster id=${id}`))
       );
   }
 
-  /* GET heroes whose name contains search term */
+
   searchMonsters(term: string): Observable<Monster[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+
       return of([]);
     }
     return this.http.get<Monster[]>(`${this.monsterUrl}/?name=${term}`).pipe(
@@ -50,21 +49,17 @@ export class MonsterService {
     );
   }
 
-  //////// Save methods //////////
-
-  /** POST: add a new hero to the server */
-  addMonster(hero: Monster): Observable<Monster> {
-    return this.http.post<Monster>(this.monsterUrl, hero, this.httpOptions).pipe(
+  addMonster(monster: Monster): Observable<Monster> {
+    return this.http.post<Monster>(this.monsterUrl, monster, this.httpOptions).pipe(
       catchError(this.handleError<Monster>('addMonster'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
   deleteMonster(id: number): Observable<Monster> {
     const url = `${this.monsterUrl}/${id}`;
 
     return this.http.delete<Monster>(url, this.httpOptions).pipe(
-      catchError(this.handleError<Monster>('deleteHero'))
+      catchError(this.handleError<Monster>('deleteMonster'))
     );
   }
 
